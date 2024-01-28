@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/douglasmnegri/tunts-rocks-test/issues"
   },
-  "homepage": "https://github.com/douglasmnegri/tunts-rocks-test#readme"
+  "homepage": "https://github.com/douglasmnegri/tunts-rocks-test#readme",
+  "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
+    "googleapis": "^105.0.0"
+  }
 }
