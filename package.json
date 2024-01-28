@@ -1,0 +1,19 @@
+{
+  "name": "tunts-rocks-test",
+  "version": "1.0.0",
+  "description": "calculates the students grades and approval status",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/douglasmnegri/tunts-rocks-test.git"
+  },
+  "author": "Douglas M. Negri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/douglasmnegri/tunts-rocks-test/issues"
+  },
+  "homepage": "https://github.com/douglasmnegri/tunts-rocks-test#readme"
+}
