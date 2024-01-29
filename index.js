@@ -3,6 +3,7 @@ const path = require('path');
 const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
+const {completeRow} = require('./calculate-grade');
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const TOKEN_PATH = path.join(process.cwd(), 'token.json');
@@ -50,7 +51,7 @@ async function listMajors(auth) {
   const sheets = google.sheets({version: 'v4', auth});
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: process.argv[2],
-    range: 'C4:C27',
+    range: 'A4:F27',
   });
   const rows = res.data.values;
   if (!rows || rows.length === 0) {
@@ -59,7 +60,7 @@ async function listMajors(auth) {
   }
   
   rows.forEach((row) => {
-    console.log(row);
+    console.log(completeRow(row));
   });
 }
 
