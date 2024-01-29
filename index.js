@@ -53,15 +53,44 @@ async function listMajors(auth) {
     spreadsheetId: process.argv[2],
     range: 'A4:F27',
   });
+
   const rows = res.data.values;
+
   if (!rows || rows.length === 0) {
     console.log('No data found.');
     return;
+  } else {
+
+    // rows.forEach((row) => {
+    //   const status = [completeRow(row).status]
+    //   console.log(status);
+    // });
+    const studentStatus = rows.map((row) => [completeRow(row).status]);
+    const finalExamGrade = rows.map((row) => [completeRow(row).naf]);
+    const resultStudentStatus = await sheets.spreadsheets.values.update({
+      spreadsheetId: process.argv[2],
+      range: 'G4:G27', 
+      valueInputOption: 'USER_ENTERED',
+      resource: {
+        values: studentStatus,
+      },
+    });
+
+    const resultFinalExamGrade = await sheets.spreadsheets.values.update({
+      spreadsheetId: process.argv[2],
+      range: 'H4:H27',
+      valueInputOption: 'USER_ENTERED',
+      resource: {
+        values: finalExamGrade,
+      },
+    });
+
+    return {
+      resultStudentStatus,
+      resultFinalExamGrade,
+    };
   }
-  
-  rows.forEach((row) => {
-    console.log(completeRow(row));
-  });
 }
+
 
 authorize().then(listMajors).catch(console.error);

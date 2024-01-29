@@ -34,7 +34,12 @@ function getStudentStatus(avgGrade) {
 
 function getNeededGrade(avgGrade) {
     const gradeNeeded = 140 - avgGrade;
-    return gradeNeeded;
+    if(gradeNeeded >= 71 && avgGrade >= 50) {
+        return Math.ceil(gradeNeeded);
+    }
+    else {
+        return null;
+    }
 }
 
 function exceedsMissedThreshold(studentObject) {
