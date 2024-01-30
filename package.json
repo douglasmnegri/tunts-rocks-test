@@ -4,7 +4,8 @@
   "description": "calculates the students grades and approval status",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js 1GnaiOoHxToTrVNtrlQ6XGp2ulvlLn_6EoLSjj1pTt1E"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/douglasmnegri/tunts-rocks-test#readme",
   "dependencies": {
     "@google-cloud/local-auth": "^2.1.0",
+    "dotenv": "^16.4.1",
     "googleapis": "^105.0.0"
   }
 }

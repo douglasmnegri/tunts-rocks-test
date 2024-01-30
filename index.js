@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fs = require('fs').promises;
 const path = require('path');
 const process = require('process');
@@ -13,6 +14,7 @@ async function loadSavedCredentialsIfExist() {
   try {
     const content = await fs.readFile(TOKEN_PATH);
     const credentials = JSON.parse(content);
+
     return google.auth.fromJSON(credentials);
   } catch (err) {
     return null;
