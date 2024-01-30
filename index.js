@@ -3,7 +3,7 @@ const path = require('path');
 const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
-const {completeRow} = require('./calculate-grade');
+const {completeRow, setTotalClasses} = require('./calculate-grade');
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const TOKEN_PATH = path.join(process.cwd(), 'token.json');
@@ -53,18 +53,30 @@ async function listMajors(auth) {
     spreadsheetId: process.argv[2],
     range: 'A4:F27',
   });
+  console.log('Student data fetched.');
+
+  const getTotalClass = await sheets.spreadsheets.values.get ({
+    spreadsheetId: process.argv[2],
+    range: 'A2:H2',
+  });
+
+  console.log('Total classes fetched.');
 
   const rows = res.data.values;
+  const classRows = getTotalClass.data.values;
+
+  if (classRows && classRows.length > 0) {
+    let totalClassesString = classRows[0][0];
+    let semesterClasses = parseInt(totalClassesString.replace(/\D/g, ''), 10); 
+    setTotalClasses(semesterClasses);
+  }
+  
 
   if (!rows || rows.length === 0) {
     console.log('No data found.');
     return;
   } else {
 
-    // rows.forEach((row) => {
-    //   const status = [completeRow(row).status]
-    //   console.log(status);
-    // });
     const studentStatus = rows.map((row) => [completeRow(row).status]);
     const finalExamGrade = rows.map((row) => [completeRow(row).naf]);
     const resultStudentStatus = await sheets.spreadsheets.values.update({
@@ -76,6 +88,8 @@ async function listMajors(auth) {
       },
     });
 
+    console.log('Student status updated.');
+
     const resultFinalExamGrade = await sheets.spreadsheets.values.update({
       spreadsheetId: process.argv[2],
       range: 'H4:H27',
@@ -84,6 +98,9 @@ async function listMajors(auth) {
         values: finalExamGrade,
       },
     });
+    
+    console.log('Final exam grades updated.');
+
 
     return {
       resultStudentStatus,

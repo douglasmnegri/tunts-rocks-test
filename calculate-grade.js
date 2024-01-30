@@ -1,4 +1,8 @@
-const totalClasses = 60;
+let totalClasses = 0;
+function setTotalClasses(semesterClasses) {
+    return totalClasses = semesterClasses;
+}
+
 function getData(row) {
     const [id, name, missed, p1, p2, p3] = row;
     const student = {
@@ -63,5 +67,6 @@ function completeRow(row) {
 }
 
 module.exports = {
-    completeRow
+    completeRow,
+    setTotalClasses
 }
