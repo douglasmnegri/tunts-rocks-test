@@ -55,13 +55,13 @@ async function authorize() {
 async function listMajors(auth) {
   const sheets = google.sheets({ version: "v4", auth });
   const res = await sheets.spreadsheets.values.get({
-    spreadsheetId: process.argv[2],
+    spreadsheetId: process.env.SHEET_ID,
     range: "A4:F27",
   });
   console.log("Student data fetched.");
 
   const getTotalClass = await sheets.spreadsheets.values.get({
-    spreadsheetId: process.argv[2],
+    spreadsheetId: process.env.SHEET_ID,
     range: "A2:H2",
   });
 
@@ -83,7 +83,7 @@ async function listMajors(auth) {
     const studentStatus = rows.map((row) => [completeRow(row).status]);
     const finalExamGrade = rows.map((row) => [completeRow(row).naf]);
     const resultStudentStatus = await sheets.spreadsheets.values.update({
-      spreadsheetId: process.argv[2],
+      spreadsheetId: process.env.SHEET_ID,
       range: "G4:G27",
       valueInputOption: "USER_ENTERED",
       resource: {
@@ -94,7 +94,7 @@ async function listMajors(auth) {
     console.log("Student status updated.");
 
     const resultFinalExamGrade = await sheets.spreadsheets.values.update({
-      spreadsheetId: process.argv[2],
+      spreadsheetId: process.env.SHEET_ID,
       range: "H4:H27",
       valueInputOption: "USER_ENTERED",
       resource: {

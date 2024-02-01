@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js 1GnaiOoHxToTrVNtrlQ6XGp2ulvlLn_6EoLSjj1pTt1E",
+    "start": "node index.js",
     "format": "prettier . --write"
   },
   "repository": {
