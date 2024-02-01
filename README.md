@@ -10,22 +10,28 @@ API created using JavaScript and Node.js
 
 ## Usage
 
- 1. **Clone the repository:**
-
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/douglasmnegri/tunts-rocks-test.git
    cd tunts-rocks-test
-   npm install
-   npm start
+   ```
 
-2. **Authenticate:**
+2. **Create a .env file with your Google Credentials**
+    See the example on `.env.example` file.
+
+3. **Install dependencies and run the program**
+    ```
+    npm install
+    npm start
+    ```
+
+4. **Authenticate:**
     Authenticate with your Google Account to proceed.
 
-## Live Demo
 
 ## Installation
 No installation is required. Simply run the npm start as stated above.
 
 ## License
-This project is licensed under the [MIT License](./MIT-LICENSE.txt)
+This project is licensed under the [MIT License](./LICENSE)
 

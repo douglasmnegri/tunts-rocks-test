@@ -1,7 +1,6 @@
 require('dotenv').config();
 const fs = require('fs').promises;
 const path = require('path');
-const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
 const {completeRow, setTotalClasses} = require('./calculate-grade');
@@ -12,8 +11,12 @@ const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
 async function loadSavedCredentialsIfExist() {
   try {
-    const content = await fs.readFile(TOKEN_PATH);
-    const credentials = JSON.parse(content);
+    const credentials = {
+      client_id: process.env.CLIENT_ID,
+      "type":"authorized_user",
+      client_secret: process.env.CLIENT_SECRET,
+      refresh_token: process.env.REFRESH_TOKEN
+    }
 
     return google.auth.fromJSON(credentials);
   } catch (err) {
